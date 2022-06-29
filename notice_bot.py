@@ -108,8 +108,7 @@ def createNewNoticeIds(notices):
 
 def runBot():
     print("-----------------------------------------------")
-    now = datetime.datetime.now()
-    print("Date: " + now.isoformat())
+    print("Date: " + NOW.isoformat())
 
     try:
         notices = scrapeNotices()
@@ -130,8 +129,8 @@ def runBot():
     
     print("-----------------------------------------------")
 
-now = nowKoreaTime()
-weekday = now.weekday()
+NOW = nowKoreaTime()
+WEEKDAY = NOW.weekday()
 # 월 ~ 금, 9시 ~ 20시 59분 사이에서만 구동한다.
-if 0 <= weekday <= 4 and 9 <= now.hour <= 20:
+if 0 <= WEEKDAY <= 4 and 9 <= NOW.hour <= 20:
     runBot()
