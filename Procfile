@@ -1,1 +1,1 @@
-worker: python parsingPost.py
+worker: python notice_bot.py
