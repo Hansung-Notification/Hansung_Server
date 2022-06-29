@@ -8,6 +8,7 @@ import inko
 import os
 import json
 from scraper import scrapeNotices
+from datetime_util import nowKoreaTime
 
 # Firebase database 인증을 위해 환경변수 값을 읽어온다. Heroku의 환경변수를 확인하면 된다.
 cred_json = OrderedDict()
@@ -125,8 +126,8 @@ def runBot():
     
     print("-----------------------------------------------")
 
-weekday = datetime.datetime.today().weekday()
-hour = int(datetime.datetime.now().strftime('%H'))
+now = nowKoreaTime()
+weekday = now.weekday()
 # 월 ~ 금, 9시 ~ 20시 59분 사이에서만 구동한다.
-if 0 <= weekday <= 4 and 9 <= hour <= 20:
+if 0 <= weekday <= 4 and 9 <= now.hour <= 20:
     runBot()
