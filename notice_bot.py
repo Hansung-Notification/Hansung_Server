@@ -9,7 +9,7 @@ import os
 import json
 from scraper import scrapeNotices
 
-# Firebase database 인증을 위해 ... json 파일을 heroku에 업로드할 수 없기 때문
+# Firebase database 인증을 위해 환경변수 값을 읽어온다. Heroku의 환경변수를 확인하면 된다.
 cred_json = OrderedDict()
 cred_json["type"] = os.environ["type"]
 cred_json["project_id"] = os.environ["project_id"]
