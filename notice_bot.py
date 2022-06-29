@@ -47,6 +47,8 @@ def importSubscribedKeywords():
     keywords = []
     dir = db.reference().child(KEYWORDS_DB_PATH)
     snapshot = dir.get()
+    if snapshot is None:
+        return []
     for keyword, count in snapshot.items():
         if int(count) <= 0:
             dir.child(keyword).delete()
@@ -64,6 +66,8 @@ def importPreviousNoticeIds():
     """
     dir = db.reference().child(NOTICE_IDS_DB_PATH)
     snapshot = dir.get()
+    if snapshot is None: 
+        return ""
     for _, ids in snapshot.items():
         return ids
     return ""

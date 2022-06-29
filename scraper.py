@@ -39,7 +39,7 @@ def scrapeNotices():
         subject = tableRow.select_one('.td-subject > a[href]')
         href = subject['href']
         
-        id = extractNumberFrom(href)
+        id = str(extractNumberFrom(href))
         title = subject.text.strip()
         url = BASE_URL + href.removeprefix("/")
         result.append(notice(id, title, url))
