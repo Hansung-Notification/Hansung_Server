@@ -1,1 +1,1 @@
-worker: python notice_bot.py
+worker: python src/main.py
