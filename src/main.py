@@ -32,6 +32,7 @@ def runBot():
     for notice in notices:
         if notice.id in previousNoticeIds:
             break
+        print('\nNew post: ' + notice.title)
         sendMessageIfNoticeHasKeyword(notice, keywords)
         
     newNoticeIds = createNewNoticeIds(notices)
