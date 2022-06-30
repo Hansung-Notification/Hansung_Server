@@ -93,4 +93,4 @@ def importPreviousNoticeIds():
 def updateNoticeIdsDatabase(newNoticeIds):
     dir = db.reference().child(NOTICE_IDS_DB_PATH)
     dir.update({NOTICE_IDS_DB_PATH: newNoticeIds})
-    print("\nNew " + NOTICE_IDS_DB_PATH + " DB:" + newNoticeIds)
+    print("\nUpdate " + NOTICE_IDS_DB_PATH + " DB:" + newNoticeIds)
