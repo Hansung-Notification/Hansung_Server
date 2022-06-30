@@ -9,7 +9,7 @@ import json
 NOTICE_IDS_DB_PATH = "notice_ids"
 KEYWORDS_DB_PATH = "keywords"
 
-ADMIN_TOPIC = "admin_monitoring"
+ADMIN_TOPIC = os.environ["admin_error_topic"]
 
 APIKEY = os.environ["APIKEY"]
 
