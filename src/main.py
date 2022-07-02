@@ -42,8 +42,7 @@ def runBot():
     print("-----------------------------------------------")
 
 NOW = nowKoreaTime()
-WEEKDAY = NOW.weekday()
-# 월 ~ 금, 9시 ~ 20시 59분 사이에서만 구동한다.
-if 0 <= WEEKDAY <= 4 and 9 <= NOW.hour <= 20:
+# 매일 8시 ~ 22시 59분 사이에서만 구동한다.
+if 8 <= NOW.hour <= 22:
     firebase.init()
     runBot()
