@@ -1,7 +1,6 @@
 from collections import OrderedDict
-from pyfcm import FCMNotification
 import firebase_admin
-from firebase_admin import credentials, db
+from firebase_admin import credentials, db, messaging
 import inko
 import os
 import json
@@ -10,10 +9,6 @@ NOTICE_IDS_DB_PATH = "notice_ids"
 KEYWORDS_DB_PATH = "keywords"
 
 ADMIN_TOPIC = os.environ["admin_error_topic"]
-
-APIKEY = os.environ["APIKEY"]
-
-PUSH_SERVICE = FCMNotification(api_key=APIKEY)
 
 def init():
     """ 
@@ -43,18 +38,19 @@ def sendMessage(topic, title, url):
     """
     title과 url을 데이터로 하여 topic을 주제로 알림을 전송한다.
     """
-    data_message = {
+    data = {
         "url": url,
         "title": title
     }
     # 한글은 키워드로 설정할 수 없기 때문에 한영변환을 한다.
     topic = inko.Inko().ko2en(topic)
-    # 구독한 사용자에게만 알림 전송
-    PUSH_SERVICE.notify_topic_subscribers(topic_name=topic, data_message=data_message)
-
+    
+    message = messaging.Message(data=data, topic=topic)
+    response = messaging.send(message)
+    print('Successfully sent message:', response)
 
 def sendErrorMessage(message):
-    sendMessage(ADMIN_TOPIC, "ERROR: " + message, " ")
+    sendMessage(ADMIN_TOPIC, title="ERROR: " + message, url=" ")
 
 def importSubscribedKeywords():
     r"""
