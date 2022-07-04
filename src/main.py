@@ -30,10 +30,9 @@ def runBot():
     keywords = firebase.importSubscribedKeywords()
     
     for notice in notices:
-        if notice.id in previousNoticeIds:
-            break
-        print('New post: ' + notice.title)
-        sendMessageIfNoticeHasKeyword(notice, keywords)
+        if notice.id not in previousNoticeIds:
+            print('New post: ' + notice.title)
+            sendMessageIfNoticeHasKeyword(notice, keywords)
         
     newNoticeIds = createNewNoticeIds(notices)
     if newNoticeIds is not None and newNoticeIds != "" and previousNoticeIds != newNoticeIds:
