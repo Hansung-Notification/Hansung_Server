@@ -39,13 +39,14 @@ def sendMessage(topic, title, url):
     title과 url을 데이터로 하여 topic을 주제로 알림을 전송한다.
     """
     data = {
+        "keyword": topic,
         "url": url,
         "title": title
     }
     # 한글은 키워드로 설정할 수 없기 때문에 한영변환을 한다.
-    topic = inko.Inko().ko2en(topic)
+    convertedTopic = inko.Inko().ko2en(topic)
     
-    message = messaging.Message(data=data, topic=topic)
+    message = messaging.Message(data=data, topic=convertedTopic)
     response = messaging.send(message)
     print('Successfully sent message:', response)
 
