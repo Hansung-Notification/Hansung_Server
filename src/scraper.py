@@ -2,15 +2,15 @@ from http.client import HTTPException
 from bs4 import BeautifulSoup 
 
 import requests
-from notice import notice
+from notice import Notice
 
 BASE_URL = "https://www.hansung.ac.kr/"
 REQUEST_URL = BASE_URL + "hansung/8385/subview.do"
 
-def extractNumberFrom(string):
+def extractNumberFrom(string: str) -> int:
     return int(''.join(filter(str.isdigit, string)))
 
-def scrapeNotices():
+def scrapeNotices() -> list[Notice]:
     r"""
     한성대학교 전체 공지사항 첫 페이지를 헤더 공지를 제외하고 스크래핑하여 :class:`notice` 리스트를 반환한다.
 
@@ -42,7 +42,7 @@ def scrapeNotices():
         id = str(extractNumberFrom(href))
         title = subject.text.strip()
         url = BASE_URL + href.removeprefix("/")
-        result.append(notice(id, title, url))
+        result.append(Notice(id, title, url))
         if result.__len__() == 10:
             break
     

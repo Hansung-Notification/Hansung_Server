@@ -1,7 +1,7 @@
 from pytz import timezone
 from datetime import datetime
 
-def nowKoreaTime():
+def nowKoreaTime() -> datetime:
     return datetime.now(timezone('Asia/Seoul'))
 
 # 테스트용 코드

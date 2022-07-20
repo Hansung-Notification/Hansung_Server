@@ -34,7 +34,7 @@ def init():
         'databaseURL': os.environ["databaseURL"]
     })
 
-def sendMessage(topic, title, url):
+def sendMessage(topic: str, title: str, url: str):
     """
     title과 url을 데이터로 하여 topic을 주제로 알림을 전송한다.
     """
@@ -50,10 +50,10 @@ def sendMessage(topic, title, url):
     response = messaging.send(message)
     print('Successfully sent message:', response)
 
-def sendErrorMessage(message):
+def sendErrorMessage(message: str):
     sendMessage(ADMIN_TOPIC, title="ERROR: " + message, url=" ")
 
-def importSubscribedKeywords():
+def importSubscribedKeywords() -> list[str]:
     r"""
     파이어 베이스에서 구독된 키워드 목록을 반환한다.
 
@@ -73,7 +73,7 @@ def importSubscribedKeywords():
 
     return keywords
 
-def importPreviousNoticeIds():
+def importPreviousNoticeIds() -> str:
     r"""
     이전 공지사항의 id들을 하나의 문자열로 반환한다.
 
@@ -87,7 +87,7 @@ def importPreviousNoticeIds():
         return ids
     return ""
 
-def updateNoticeIdsDatabase(newNoticeIds):
+def updateNoticeIdsDatabase(newNoticeIds: str):
     dir = db.reference().child(NOTICE_IDS_DB_PATH)
     dir.update({NOTICE_IDS_DB_PATH: newNoticeIds})
     print("\nUpdate " + NOTICE_IDS_DB_PATH + " DB:" + newNoticeIds)

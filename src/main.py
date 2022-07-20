@@ -1,8 +1,9 @@
 from scraper import scrapeNotices
 from datetime_util import nowKoreaTime
 import firebase
+from notice import Notice
 
-def sendMessageIfNoticeHasKeyword(notice, keywords):
+def sendMessageIfNoticeHasKeyword(notice: Notice, keywords: list[str]):
     r"""
     공지사항 제목에 포함된 키워드를 찾아 해당 키워드를 토픽으로 알림을 보낸다.
     """
@@ -11,7 +12,7 @@ def sendMessageIfNoticeHasKeyword(notice, keywords):
             print(keyword, end=", ")
             firebase.sendMessage(keyword, notice.title, notice.url)
 
-def createNewNoticeIds(notices):
+def createNewNoticeIds(notices: list[Notice]) -> str:
     result = ""
     for notice in notices:
         result += notice.id + ','
@@ -35,7 +36,7 @@ def runBot():
             sendMessageIfNoticeHasKeyword(notice, keywords)
         
     newNoticeIds = createNewNoticeIds(notices)
-    if newNoticeIds is not None and newNoticeIds != "" and previousNoticeIds != newNoticeIds:
+    if newNoticeIds != "" and previousNoticeIds != newNoticeIds:
         firebase.updateNoticeIdsDatabase(newNoticeIds)
     
     print("-----------------------------------------------")
