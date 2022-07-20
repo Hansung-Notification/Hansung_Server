@@ -1,6 +1,8 @@
 name: Test scraper
 
 on:
+  push:
+    branches: ["feature/ci"]
   schedule:
     - cron: "0 3 * * *"
 
