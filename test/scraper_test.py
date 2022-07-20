@@ -4,7 +4,7 @@ from github import Github
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE + '/src')
 import scraper
-from notice import notice
+from notice import Notice
 
 GIT_ACCESS_TOKEN = os.environ["GIT_ACCESS_TOKEN"]
 REPO_URL = "jja08111/HansungNotificationServer"
@@ -13,7 +13,7 @@ def createIssue(body: str):
     github = Github(GIT_ACCESS_TOKEN)
     github.get_repo(REPO_URL).create_issue("공지 스크래핑 실패", body=body, labels=["bug"])
 
-def printResult(result: list[notice]):
+def printResult(result: list[Notice]):
     print('-------Result-------')
     for notice in result:
         print(notice.id)
