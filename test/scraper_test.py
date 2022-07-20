@@ -1,7 +1,8 @@
 import os, sys
 from github import Github
 
-sys.path.append(os.path.abspath('../src'))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE + '/src')
 import scraper
 
 GIT_ACCESS_TOKEN = os.environ["GIT_ACCESS_TOKEN"]
