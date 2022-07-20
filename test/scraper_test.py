@@ -1,9 +1,11 @@
-import scraper
-import os
+import os, sys
 from github import Github
 
+sys.path.append(os.path.abspath('../src'))
+import scraper
+
 GIT_ACCESS_TOKEN = os.environ["GIT_ACCESS_TOKEN"]
-REPO_URL = "https://github.com/jja08111/HansungNotificationServer/"
+REPO_URL = "jja08111/HansungNotificationServer"
 
 def createIssue(body: str):
     github = Github(GIT_ACCESS_TOKEN)
@@ -13,9 +15,10 @@ def main():
     '''스크래퍼가 작동하지 않는다면 HansungNotificationServer에 이슈를 등록한다.'''
     try:
         result = scraper.scrapeNotices()
-        if (result.count < 1):
+        if (result.__len__() < 1):
             raise Exception("스크래핑한 공지가 0개입니다.")
     except BaseException as e:
+        print('Failed to scrap notices.')
         createIssue(str(e))
 
 if __name__ == "__main__":
