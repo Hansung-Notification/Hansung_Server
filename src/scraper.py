@@ -27,15 +27,12 @@ def scrapeNotices() -> list[Notice]:
         raise e
 
     result = []
-    tableRows = soup.select('tr')
+    tableRows = soup.select('tbody>tr')
     for tableRow in tableRows:
-        numberTag = tableRow.select_one('.td-num')
-        if numberTag is None:
+        # 헤더 공지 혹은 블라인드 처리된 공지는 건너뛴다.
+        if any(className in tableRow.attrs['class'] for className in ['notice', 'blind']):
             continue
-        number = numberTag.text
-        # 헤더 공지사항은 예외한다.
-        if number.isdigit() == False:
-            continue
+
         subject = tableRow.select_one('.td-subject > a[href]')
         href = subject['href']
         
