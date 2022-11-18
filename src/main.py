@@ -2,6 +2,8 @@ from scraper import scrapeNotices
 from datetime_util import nowKoreaTime
 import firebase
 from notice import Notice
+import time
+import schedule
 
 def sendMessageIfNoticeHasKeyword(notice: Notice, keywords: list[str]):
     r"""
@@ -20,7 +22,7 @@ def createNewNoticeIds(notices: list[Notice]) -> str:
 
 def runBot():
     print("-----------------------------------------------")
-    print("Date: " + NOW.isoformat())
+    print("Date: " + nowKoreaTime().isoformat())
 
     try:
         notices = scrapeNotices()
@@ -42,8 +44,18 @@ def runBot():
     
     print("-----------------------------------------------")
 
-NOW = nowKoreaTime()
-# 매일 8시 ~ 22시 59분 사이에서만 구동한다.
-if 8 <= NOW.hour <= 22:
-    firebase.init()
-    runBot()
+def testSchedule():
+    print("실행됨==========VVVVVV")
+    print(nowKoreaTime().isoformat())
+
+schedule.every(10).minutes.do(testSchedule)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+# NOW = 
+# # 매일 8시 ~ 22시 59분 사이에서만 구동한다.
+# if 8 <= NOW.hour <= 22:
+#     firebase.init()
+#     # runBot()
