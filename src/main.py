@@ -26,7 +26,6 @@ def runBot():
 
     try:
         notices = scrapeNotices()
-        firebase.sendErrorMessage(notices)
     except Exception:
         firebase.sendErrorMessage('Scraping 실패')
         return
