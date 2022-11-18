@@ -48,9 +48,9 @@ def testBot():
     print("VVVVVVVV")
     print(nowKoreaTime().isoformat())
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(func=testBot, trigger="interval", minutes=10)
-scheduler.start()
+# scheduler = BackgroundScheduler()
+# scheduler.add_job(func=testBot, trigger="interval", minutes=10)
+# scheduler.start()
 
 app = Flask(__name__)
 
