@@ -2,7 +2,8 @@ from scraper import scrapeNotices
 from datetime_util import nowKoreaTime
 import firebase
 from notice import Notice
-import time
+from flask import Flask
+from apscheduler.schedulers.background import BackgroundScheduler
 
 def sendMessageIfNoticeHasKeyword(notice: Notice, keywords: list[str]):
     r"""
@@ -43,11 +44,19 @@ def runBot():
     
     print("-----------------------------------------------")
 
-print("실행됨==========VVVVVV")
-print(nowKoreaTime().isoformat())
+def testBot():
+    print("VVVVVVVV")
+    print(nowKoreaTime().isoformat())
 
-# NOW = 
-# # 매일 8시 ~ 22시 59분 사이에서만 구동한다.
-# if 8 <= NOW.hour <= 22:
-#     firebase.init()
-#     # runBot()
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=testBot, trigger="interval", minutes=10)
+scheduler.start()
+
+app = Flask(__name__)
+
+@app.route('/')
+def empty_page():
+    return 'Hello world!'
+
+if __name__ == "__main__":
+    app.run()

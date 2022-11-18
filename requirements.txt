@@ -5,3 +5,5 @@ firebase_admin==4.5.0
 git+https://github.com/JackCme/inko.py.git
 bs4
 pytz==2022.1
+flask==2.2.2
+apscheduler==3.9.1
