@@ -45,7 +45,6 @@ def runBot():
 
 print("실행됨==========VVVVVV")
 print(nowKoreaTime().isoformat())
-time.sleep(60 * 10)
 
 # NOW = 
 # # 매일 8시 ~ 22시 59분 사이에서만 구동한다.
