@@ -48,7 +48,7 @@ def testSchedule():
     print("실행됨==========VVVVVV")
     print(nowKoreaTime().isoformat())
 
-schedule.every(10).minutes.do(testSchedule)
+schedule.every(5).minutes.do(testSchedule)
 
 while True:
     schedule.run_pending()
