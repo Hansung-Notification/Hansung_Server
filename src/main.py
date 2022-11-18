@@ -21,6 +21,7 @@ def createNewNoticeIds(notices: list[Notice]) -> str:
     return result.removesuffix(',')
 
 def runBot():
+    firebase.init()
     print("-----------------------------------------------")
     print("Date: " + nowKoreaTime().isoformat())
 
@@ -54,5 +55,4 @@ def empty_page():
     return 'Hello world!'
 
 if __name__ == "__main__":
-    firebase.init()
     app.run()
