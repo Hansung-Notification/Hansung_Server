@@ -21,7 +21,6 @@ def createNewNoticeIds(notices: list[Notice]) -> str:
     return result.removesuffix(',')
 
 def runBot():
-    firebase.init()
     print("-----------------------------------------------")
     print("Date: " + nowKoreaTime().isoformat())
 
@@ -49,6 +48,8 @@ scheduler.add_job(func=runBot, trigger="interval", minutes=10)
 scheduler.start()
 
 app = Flask(__name__)
+
+firebase.init()
 
 @app.route('/')
 def empty_page():
