@@ -44,7 +44,7 @@ def runBot():
     print("-----------------------------------------------")
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=runBot, trigger="interval", minutes=10)
+scheduler.add_job(id="notification_bot_task",func=runBot, trigger="interval", minutes=10)
 scheduler.start()
 
 app = Flask(__name__)
